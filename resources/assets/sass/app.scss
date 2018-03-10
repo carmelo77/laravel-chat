@@ -1,0 +1,48 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+#app{
+  margin-top:6em;
+  background:white;
+
+  padding:10px;
+  padding-left:0px;
+}
+
+.contact{
+  margin-top:-10px;
+  margin-bottom:-10px;
+  padding-top: 10px;
+  padding-left:10px;
+  height: 100%;
+  overflow:auto;
+}
+.contact .user{
+  padding: 5px;
+}
+.contact .user:hover{
+  background:#c3c3c3;
+  cursor:pointer;
+}
+.contact .user .name{
+  margin-top:20px;
+}
+
+.messages-box{
+  height: 500px;
+  border-left:2px solid grey;
+  position: relative;
+}
+
+.send-message-box{
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+}
