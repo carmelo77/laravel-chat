@@ -8380,14 +8380,8 @@ button.close {
 }
 
 .messages-box {
-  height: 500px;
+  height: 450px;
   border-left: 2px solid grey;
   position: relative;
-}
-
-.send-message-box {
-  width: 100%;
-  position: absolute;
-  bottom: 0px;
 }
 

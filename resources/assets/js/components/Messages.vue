@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-8 messages-box">
-  	<div class="row">
+  	<div class="row" style="height:93%;overflow-y:auto;">
       <div class="col-md-12" v-for="message in messages">
         <div class="row">
           <div class="col-md-1">
@@ -12,7 +12,9 @@
         </div>
       </div>
   	</div>
-    <send-message :user="user" :conversation="conversation"></send-message>
+    <div class="row">
+      <send-message :user="user" :conversation="conversation"></send-message>
+    </div>
   </div>
 </template>
 
