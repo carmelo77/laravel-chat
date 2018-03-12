@@ -20,5 +20,9 @@
     </div>
     <!-- Latest compiled and minified JavaScript -->
     <script src="{{ url('/js/app.js') }}"></script>
+    <script src="{{url('/')}}/scripts/socket.js" type="text/javascript"></script>
+    <script>
+        var socket = io('http://localhost:3000/');
+    </script>
   </body>
 </html>

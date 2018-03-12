@@ -8,6 +8,7 @@ use App\User;
 use App\Conversation;
 use App\UserConversation;
 use App\Message;
+use LRedis;
 
 use Auth;
 
@@ -111,6 +112,9 @@ class MessagesController extends Controller
     		'user_id' => $userLogged->id,
     		'message' => $request->message,
     	]);
+
+        $redis = LRedis::connection();
+        $redis->publish('message', $conversation);
 
     	return response()->json($conversation);
     }
