@@ -32,6 +32,8 @@
         }).then((response) => {
           bus.$emit('setConversation', response.data);
         });
+
+        this.message = ""
       }
     }
   }

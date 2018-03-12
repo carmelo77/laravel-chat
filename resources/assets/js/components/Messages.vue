@@ -36,8 +36,25 @@
           conversation: this.conversation,
         }).then((response) => {
           this.messages = response.data;
+          //console.log(this.messages)
         });
       });
+    },
+
+    sockets: {
+      message(data) {
+        let msg = JSON.parse(data)
+
+        console.log(msg.id)
+
+        axios.post('/messages', {
+          user: this.user.id,
+          conversation: this.conversation,
+        }).then((response) => {
+          this.messages = response.data;
+          //console.log(this.messages)
+        });
+      }
     }
   }
 </script>
