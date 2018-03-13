@@ -43559,7 +43559,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "\n.form-control[data-v-0063b638]{\n  border-radius: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.form-control[data-v-0063b638]{\n  border-radius: 0px;\n}\n.icon-file[data-v-0063b638] {\n  font-size: 25px;\n}\n", ""]);
 
 // exports
 
@@ -43618,6 +43618,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -43626,21 +43633,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   data: function data() {
     return {
-      message: null
+      message: null,
+      image: '',
+      filename: ''
     };
   },
 
 
   methods: {
+    pickFile: function pickFile() {
+      this.$refs.fileInput.click();
+    },
+    imageChanged: function imageChanged(e) {
+      var _this = this;
+
+      //console.log(e.target.files[0])
+      var fileReader = new FileReader();
+
+      fileReader.readAsDataURL(e.target.files[0]);
+      this.filename = e.target.files[0].name;
+
+      fileReader.onload = function (e) {
+        _this.image = e.target.result;
+
+        if (_this.image != '') {
+          $('#status').css('display', 'block');
+        }
+      };
+
+      //console.log(this.image)
+    },
     save: function save() {
-      axios.post('/send-message', {
-        message: this.message,
-        user: this.user.id
-      }).then(function (response) {
+
+      var msg = {};
+
+      if (this.image != '') {
+        msg = { message: this.image, user: this.user.id, type: 'images' };
+      } else {
+        msg = { message: this.message, user: this.user.id, type: 'text' };
+      }
+
+      axios.post('/send-message', msg).then(function (response) {
         __WEBPACK_IMPORTED_MODULE_0__bus__["a" /* default */].$emit('setConversation', response.data);
       });
 
       this.message = "";
+      this.image = "";
+      this.filename = '';
+      $('#status').css('display', 'none');
     }
   }
 });
@@ -43654,43 +43694,74 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row send-message-box" }, [
-    _c("div", { staticClass: "col-md-11" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.message,
-            expression: "message"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.message },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.message = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-md-1" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn",
+    _c("form", { ref: "form" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _vm._v("\n       "),
+        _c("i", {
+          staticClass: "fa fa-link icon-file",
           on: {
             click: function($event) {
-              _vm.save()
+              _vm.pickFile()
             }
           }
-        },
-        [_c("i", { staticClass: "fa fa-send" }), _vm._v("\n      Send\n    ")]
-      )
+        }),
+        _vm._v(" "),
+        _c("input", {
+          ref: "fileInput",
+          staticStyle: { display: "none" },
+          attrs: { type: "file" },
+          on: { change: _vm.imageChanged }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-11" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.message,
+              expression: "message"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "message" },
+          domProps: { value: _vm.message },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.message = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "span",
+          { staticStyle: { display: "none" }, attrs: { id: "status" } },
+          [_vm._v(_vm._s(_vm.filename) + " has ready")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-1" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.save()
+              }
+            }
+          },
+          [
+            _c("i", { staticClass: "fa fa-send" }),
+            _vm._v("\n        Send\n      ")
+          ]
+        )
+      ])
     ])
   ])
 }
@@ -43822,6 +43893,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43896,9 +43970,25 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-11 message" }, [
-              _vm._v("\n          " + _vm._s(message.message) + "\n        ")
-            ])
+            message.type == 2
+              ? _c("div", { staticClass: "col-md-11 message" }, [
+                  _vm._v(
+                    "\n          " + _vm._s(message.message) + "\n        "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            message.type == 1
+              ? _c("div", { staticClass: "col-md-11 message" }, [
+                  _c("img", {
+                    attrs: {
+                      src: "/laravel-chat/public/images/" + message.message,
+                      alt: "",
+                      width: "100"
+                    }
+                  })
+                ])
+              : _vm._e()
           ])
         ])
       })

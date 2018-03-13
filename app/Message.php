@@ -10,6 +10,7 @@ class Message extends Model
     	'conversation_id',
     	'user_id',
     	'message',
+    	'type'
     ];
 
     public function user()

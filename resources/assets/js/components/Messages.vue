@@ -6,8 +6,11 @@
           <div class="col-md-1">
             <img :src="message.user.image" :alt="message.user.name" width="60px" />
           </div>
-          <div class="col-md-11 message">
+          <div class="col-md-11 message" v-if="message.type == 2 ">
             {{ message.message }}
+          </div>
+          <div class="col-md-11 message" v-if="message.type == 1 ">
+            <img :src="'/laravel-chat/public/images/'+message.message" alt="" width="100">
           </div>
         </div>
       </div>

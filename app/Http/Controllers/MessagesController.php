@@ -57,6 +57,7 @@ class MessagesController extends Controller
 
     public function sentMessage(Request $request)
     {
+        
     	$request->validate([
     		'user' => 'required',
     		'message' => 'required|min:3',
@@ -107,15 +108,50 @@ class MessagesController extends Controller
 	    	}
     	}
 
-    	$message = Message::create([
-    		'conversation_id' => $conversation->id,
-    		'user_id' => $userLogged->id,
-    		'message' => $request->message,
-    	]);
+        if($request->type === 'images') {
 
-        $redis = LRedis::connection();
-        $redis->publish('message', $conversation);
+            $explode = explode(',', $request->message);
 
-    	return response()->json($conversation);
+            $decoded = base64_decode($explode[1]);
+
+            if(str_contains($explode[0], 'jpeg')) {
+                $ext = 'jpg';
+            } else if(str_contains($explode[0], 'png')) {
+                $ext = 'png';
+            }
+
+            $filename = str_random().'.'.$ext;
+            $path = public_path().'/images/'.$filename; 
+
+            file_put_contents($path, $decoded);
+
+            Message::create([
+                'conversation_id' => $conversation->id,
+                'user_id' => $userLogged->id,
+                'message' => $filename,
+                'type'    => 1
+            ]);
+
+            $redis = LRedis::connection();
+            $redis->publish('message', $conversation);
+
+            return response()->json($conversation);
+
+        } else if($request->type === 'text'){
+
+        	Message::create([
+        		'conversation_id' => $conversation->id,
+        		'user_id' => $userLogged->id,
+        		'message' => $request->message,
+                'type'    => 2
+        	]);
+
+            $redis = LRedis::connection();
+            $redis->publish('message', $conversation);
+
+            return response()->json($conversation);
+
+        }
+
     }
 }
