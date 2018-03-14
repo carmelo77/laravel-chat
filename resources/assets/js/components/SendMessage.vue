@@ -6,7 +6,7 @@
         <input type="file" ref="fileInput" style="display: none;" @change="imageChanged">
       </div>
       <div class="col-md-11">
-        <input type="text" class="form-control" id="message" v-model="message" />
+        <input type="text" class="form-control" id="message" v-model="message" @keyup.enter="save()" />
         <span style="display: none;" id="status">{{ filename }} has ready</span>
       </div>
       <div class="col-md-1">

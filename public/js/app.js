@@ -43728,6 +43728,15 @@ var render = function() {
           attrs: { type: "text", id: "message" },
           domProps: { value: _vm.message },
           on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              _vm.save()
+            },
             input: function($event) {
               if ($event.target.composing) {
                 return
