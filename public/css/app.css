@@ -8364,6 +8364,7 @@ button.close {
   padding-left: 10px;
   height: 100%;
   overflow: auto;
+  position: relative;
 }
 
 .contact .user {

@@ -61,7 +61,7 @@
         }
 
         axios.post('/send-message', msg).then((response) => {
-          //bus.$emit('setConversation', response.data);
+          $(".chat-box").scrollTop($("#chat-box").height());
         });
 
         this.message = '';
@@ -72,7 +72,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .form-control{
     border-radius: 0px;
   }

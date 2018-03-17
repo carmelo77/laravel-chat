@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-8 messages-box">
-  	<div class="row" style="height:93%;overflow-y:auto;" id="visible-chat">
+  	<div class="row" id="visible-chat">
       <div class="chat-box">
         <div class="chats" id="chat-box">
           <div :class="{
@@ -15,7 +15,7 @@
             <div class="chat-body">
               <div class="chat-content" v-if="message.type == 2">
                 <p v-text="message.message"></p>
-                <time class="chat-time" datetime="2017-06-01T08:30">
+                <time class="chat-time" :datetime="message.created_at">
                   {{ message.created_at }}
                 </time>
               </div>
@@ -24,7 +24,7 @@
                 <a :href="'/laravel-chat/public/images/'+message.message" target="_blank">
                   <img :src="'/laravel-chat/public/images/'+message.message" alt="" width="100">
                 </a>
-                <time class="chat-time" datetime="2017-06-01T08:30">
+                <time class="chat-time" :datetime="message.created_at">
                   {{ message.created_at }}
                 </time>
               </div>
@@ -74,9 +74,13 @@
       });
     },
 
+    methods:{
+      
+    },
+
     sockets: {
       message(data) {
-        let msg = JSON.parse(data)
+        let msg = JSON.parse(data);
 
         this.messages.push(msg);
 
@@ -89,6 +93,11 @@
 </script>
 
 <style scoped>
+  #visible-chat{
+    height:93%;
+    overflow-y:auto;
+    margin-top:15px;
+  }
   .message{
     padding: 10px;
     padding-left: 20px;

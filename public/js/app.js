@@ -43480,19 +43480,19 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(44)
+  __webpack_require__(71)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(47)
 /* template */
-var __vue_template__ = __webpack_require__(48)
+var __vue_template__ = __webpack_require__(73)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-0063b638"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -43525,46 +43525,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(45);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(12)("96c256c0", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0063b638\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SendMessage.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0063b638\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SendMessage.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(11)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.form-control[data-v-0063b638]{\n  border-radius: 0px;\n}\n.icon-file[data-v-0063b638] {\n  font-size: 25px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 44 */,
+/* 45 */,
 /* 46 */
 /***/ (function(module, exports) {
 
@@ -43669,7 +43631,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
 
       axios.post('/send-message', msg).then(function (response) {
-        //bus.$emit('setConversation', response.data);
+        $(".chat-box").scrollTop($("#chat-box").height());
       });
 
       this.message = '';
@@ -43680,96 +43642,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row send-message-box" }, [
-    _c(
-      "form",
-      {
-        ref: "form",
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            _vm.save()
-          }
-        }
-      },
-      [
-        _c("div", { staticClass: "col-md-1 col-xs-1 text-right" }, [
-          _c("i", {
-            staticClass: "fa fa-camera icon-file",
-            on: {
-              click: function($event) {
-                _vm.pickFile()
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            ref: "fileInput",
-            staticStyle: { display: "none" },
-            attrs: { type: "file" },
-            on: { change: _vm.imageChanged }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-9 col-xs-8" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.message,
-                expression: "message"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", id: "message" },
-            domProps: { value: _vm.message },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.message = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
-      ]
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2 col-xs-2" }, [
-      _c("button", { staticClass: "btn" }, [
-        _c("i", { staticClass: "fa fa-send" }),
-        _vm._v("\n        Send\n      ")
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0063b638", module.exports)
-  }
-}
-
-/***/ }),
+/* 48 */,
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43855,7 +43728,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "\n.message[data-v-ade8bc7a]{\n  padding: 10px;\n  padding-left: 20px;\n}\n", ""]);
+exports.push([module.i, "\n#visible-chat[data-v-ade8bc7a]{\n  height:93%;\n  overflow-y:auto;\n  margin-top:15px;\n}\n.message[data-v-ade8bc7a]{\n  padding: 10px;\n  padding-left: 20px;\n}\n", ""]);
 
 // exports
 
@@ -43945,6 +43818,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
+  methods: {},
+
   sockets: {
     message: function message(data) {
       var msg = JSON.parse(data);
@@ -43967,126 +43842,118 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-md-8 messages-box" }, [
-    _c(
-      "div",
-      {
-        staticClass: "row",
-        staticStyle: { height: "93%", "overflow-y": "auto" },
-        attrs: { id: "visible-chat" }
-      },
-      [
-        _c("div", { staticClass: "chat-box" }, [
-          _c(
-            "div",
-            { staticClass: "chats", attrs: { id: "chat-box" } },
-            _vm._l(_vm.messages, function(message) {
-              return _c(
-                "div",
-                {
-                  class: {
-                    chat: true,
-                    "chat-left": _vm.currentUser.id != message.user.id
-                  }
-                },
-                [
-                  _c("div", { staticClass: "chat-avatar" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "avatar",
+    _c("div", { staticClass: "row", attrs: { id: "visible-chat" } }, [
+      _c("div", { staticClass: "chat-box" }, [
+        _c(
+          "div",
+          { staticClass: "chats", attrs: { id: "chat-box" } },
+          _vm._l(_vm.messages, function(message) {
+            return _c(
+              "div",
+              {
+                class: {
+                  chat: true,
+                  "chat-left": _vm.currentUser.id != message.user.id
+                }
+              },
+              [
+                _c("div", { staticClass: "chat-avatar" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "avatar",
+                      attrs: {
+                        "data-toggle": "tooltip",
+                        href: "#",
+                        "data-placement": "right",
+                        title: "",
+                        "data-original-title": "June Lane"
+                      }
+                    },
+                    [
+                      _c("img", {
                         attrs: {
-                          "data-toggle": "tooltip",
-                          href: "#",
-                          "data-placement": "right",
-                          title: "",
-                          "data-original-title": "June Lane"
+                          src: message.user.image,
+                          alt: message.user.name,
+                          width: "60px"
                         }
-                      },
-                      [
-                        _c("img", {
-                          attrs: {
-                            src: message.user.image,
-                            alt: message.user.name,
-                            width: "60px"
-                          }
-                        })
-                      ]
-                    )
-                  ]),
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "chat-body" }, [
+                  message.type == 2
+                    ? _c("div", { staticClass: "chat-content" }, [
+                        _c("p", {
+                          domProps: { textContent: _vm._s(message.message) }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "time",
+                          {
+                            staticClass: "chat-time",
+                            attrs: { datetime: message.created_at }
+                          },
+                          [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(message.created_at) +
+                                "\n              "
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c("div", { staticClass: "chat-body" }, [
-                    message.type == 2
-                      ? _c("div", { staticClass: "chat-content" }, [
-                          _c("p", {
-                            domProps: { textContent: _vm._s(message.message) }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "time",
-                            {
-                              staticClass: "chat-time",
-                              attrs: { datetime: "2017-06-01T08:30" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(message.created_at) +
-                                  "\n              "
-                              )
-                            ]
-                          )
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    message.type == 1
-                      ? _c("div", { staticClass: "chat-content" }, [
-                          _c(
-                            "a",
-                            {
+                  message.type == 1
+                    ? _c("div", { staticClass: "chat-content" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href:
+                                "/laravel-chat/public/images/" +
+                                message.message,
+                              target: "_blank"
+                            }
+                          },
+                          [
+                            _c("img", {
                               attrs: {
-                                href:
+                                src:
                                   "/laravel-chat/public/images/" +
                                   message.message,
-                                target: "_blank"
+                                alt: "",
+                                width: "100"
                               }
-                            },
-                            [
-                              _c("img", {
-                                attrs: {
-                                  src:
-                                    "/laravel-chat/public/images/" +
-                                    message.message,
-                                  alt: "",
-                                  width: "100"
-                                }
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "time",
-                            {
-                              staticClass: "chat-time",
-                              attrs: { datetime: "2017-06-01T08:30" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(message.created_at) +
-                                  "\n              "
-                              )
-                            ]
-                          )
-                        ])
-                      : _vm._e()
-                  ])
-                ]
-              )
-            })
-          )
-        ])
-      ]
-    ),
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "time",
+                          {
+                            staticClass: "chat-time",
+                            attrs: { datetime: message.created_at }
+                          },
+                          [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(message.created_at) +
+                                "\n              "
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ]
+            )
+          })
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -44115,6 +43982,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(74)
+}
 var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(55)
@@ -44123,7 +43994,7 @@ var __vue_template__ = __webpack_require__(56)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -44182,13 +44053,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      users: []
+      users: [],
+      show: false
     };
   },
   created: function created() {
@@ -44203,6 +44082,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     changeConversation: function changeConversation(user) {
       __WEBPACK_IMPORTED_MODULE_0__bus__["a" /* default */].$emit('conversation', user);
+    },
+    showUsers: function showUsers() {
+      if (!this.show) {
+        $('.contact .user').show();
+        this.show = !this.show;
+
+        return;
+      }
+
+      $('.contact .user').hide();
+      this.show = !this.show;
     }
   }
 });
@@ -44215,41 +44105,53 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "col-md-4 contact" },
-    _vm._l(_vm.users, function(user) {
-      return _c(
-        "div",
-        {
-          staticClass: "row user",
-          on: {
-            click: function($event) {
-              _vm.changeConversation(user)
+  return _c("div", { staticClass: "col-md-4 contact" }, [
+    _c(
+      "div",
+      { staticClass: "col-xs-9 col-md-12" },
+      _vm._l(_vm.users, function(user) {
+        return _c(
+          "div",
+          {
+            staticClass: "row user",
+            on: {
+              click: function($event) {
+                _vm.changeConversation(user)
+              }
             }
-          }
-        },
-        [
-          _c("div", { staticClass: "col-xs-2 text-center" }, [
-            _c("img", {
-              staticClass: "img-circle",
-              attrs: { src: user.image, width: "60px" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-8" }, [
-            _c("div", { staticClass: "name" }, [
-              _vm._v("\n        " + _vm._s(user.name) + "\n      ")
+          },
+          [
+            _c("div", { staticClass: "col-xs-2 text-center" }, [
+              _c("img", {
+                staticClass: "img-circle",
+                attrs: { src: user.image, width: "60px" }
+              })
             ]),
             _vm._v(" "),
-            _c("span", { staticClass: "last-message" }, [
-              _vm._v("\n        Lorem ipsum dolor sit amet, elit...\n      ")
+            _c("div", { staticClass: "col-xs-8" }, [
+              _c("div", { staticClass: "name" }, [
+                _vm._v("\n          " + _vm._s(user.name) + "\n        ")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "last-message" }, [
+                _vm._v(
+                  "\n          Lorem ipsum dolor sit amet, elit...\n        "
+                )
+              ])
             ])
-          ])
-        ]
+          ]
+        )
+      })
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-xs-3 text-right hidden-md hidden-lg" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", on: { click: _vm.showUsers } },
+        [_c("i", { staticClass: "fa fa-bars" })]
       )
-    })
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -44266,6 +44168,189 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(72);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("7bf10e4d", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0063b638\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SendMessage.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0063b638\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SendMessage.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(11)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.form-control{\n  border-radius: 0px;\n}\n.icon-file {\n  font-size: 25px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row send-message-box" }, [
+    _c(
+      "form",
+      {
+        ref: "form",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.save()
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "col-md-1 col-xs-1 text-right" }, [
+          _c("i", {
+            staticClass: "fa fa-camera icon-file",
+            on: {
+              click: function($event) {
+                _vm.pickFile()
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            ref: "fileInput",
+            staticStyle: { display: "none" },
+            attrs: { type: "file" },
+            on: { change: _vm.imageChanged }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-xs-8" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.message,
+                expression: "message"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", id: "message" },
+            domProps: { value: _vm.message },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.message = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2 col-xs-2" }, [
+      _c("button", { staticClass: "btn" }, [
+        _c("i", { staticClass: "fa fa-send" }),
+        _vm._v("\n        Send\n      ")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0063b638", module.exports)
+  }
+}
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(75);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("118d5b42", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41df254a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Contacts.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41df254a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Contacts.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(11)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n@media (max-width: 994px) {\n.contact{\n    overflow: auto;\n    padding-top: 0px;\n    height: 100% !important;\n}\n.contact .user{\n    display: none;\n}\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
