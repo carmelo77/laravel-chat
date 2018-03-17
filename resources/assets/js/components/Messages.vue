@@ -1,16 +1,34 @@
 <template>
   <div class="col-md-8 messages-box">
-  	<div class="row" style="height:93%;overflow-y:auto;">
-      <div class="col-md-12" v-for="message in messages">
-        <div class="row">
-          <div class="col-md-1">
-            <img :src="message.user.image" :alt="message.user.name" width="60px" />
-          </div>
-          <div class="col-md-11 message" v-if="message.type == 2 ">
-            {{ message.message }}
-          </div>
-          <div class="col-md-11 message" v-if="message.type == 1 ">
-            <img :src="'/laravel-chat/public/images/'+message.message" alt="" width="100">
+  	<div class="row" style="height:93%;overflow-y:auto;" id="visible-chat">
+      <div class="chat-box">
+        <div class="chats" id="chat-box">
+          <div :class="{
+            chat: true,
+            'chat-left': currentUser.id != message.user.id
+          }" v-for="message in messages">
+            <div class="chat-avatar">
+              <a class="avatar" data-toggle="tooltip" href="#" data-placement="right" title="" data-original-title="June Lane">
+                <img :src="message.user.image" :alt="message.user.name" width="60px" />
+              </a>
+            </div>
+            <div class="chat-body">
+              <div class="chat-content" v-if="message.type == 2">
+                <p v-text="message.message"></p>
+                <time class="chat-time" datetime="2017-06-01T08:30">
+                  {{ message.created_at }}
+                </time>
+              </div>
+
+              <div class="chat-content" v-if="message.type == 1">
+                <a :href="'/laravel-chat/public/images/'+message.message" target="_blank">
+                  <img :src="'/laravel-chat/public/images/'+message.message" alt="" width="100">
+                </a>
+                <time class="chat-time" datetime="2017-06-01T08:30">
+                  {{ message.created_at }}
+                </time>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -28,7 +46,8 @@
       return {
         user: null,
         conversation: null,
-        messages: []
+        messages: [],
+        currentUser: null,
       }
     },
 
@@ -41,8 +60,17 @@
           conversation: this.conversation,
         }).then((response) => {
           this.messages = response.data;
-          //console.log(this.messages)
+
+          setTimeout(() => {
+            $(".chat-box").scrollTop($("#chat-box").height());
+          }, 500)
+
+          //$('#chat-box').scrollTop();​​
         });
+      });
+
+      axios.get('get-user').then((response) => {
+        this.currentUser = response.data;
       });
     },
 
@@ -50,17 +78,13 @@
       message(data) {
         let msg = JSON.parse(data)
 
-        console.log(msg.id)
+        this.messages.push(msg);
 
-        axios.post('/messages', {
-          user: this.user.id,
-          conversation: this.conversation,
-        }).then((response) => {
-          this.messages = response.data;
-          //console.log(this.messages)
-        });
+        setTimeout(() => {
+          $(".chat-box").scrollTop($("#chat-box").height());
+        }, 200);
       }
-    }
+    },
   }
 </script>
 

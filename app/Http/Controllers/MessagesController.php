@@ -125,29 +125,33 @@ class MessagesController extends Controller
 
             file_put_contents($path, $decoded);
 
-            Message::create([
+            $message = Message::create([
                 'conversation_id' => $conversation->id,
                 'user_id' => $userLogged->id,
                 'message' => $filename,
                 'type'    => 1
             ]);
 
+            $message->user = $message->user;
+
             $redis = LRedis::connection();
-            $redis->publish('message', $conversation);
+            $redis->publish('message', $message);
 
             return response()->json($conversation);
 
         } else if($request->type === 'text'){
 
-        	Message::create([
+        	$message = Message::create([
         		'conversation_id' => $conversation->id,
         		'user_id' => $userLogged->id,
         		'message' => $request->message,
                 'type'    => 2
         	]);
 
+            $message->user = $message->user;
+
             $redis = LRedis::connection();
-            $redis->publish('message', $conversation);
+            $redis->publish('message', $message);
 
             return response()->json($conversation);
 

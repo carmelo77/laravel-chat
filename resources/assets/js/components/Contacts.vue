@@ -1,8 +1,8 @@
 <template>
   <div class="col-md-4 contact">
   	<div class="row user" v-for="user in users" @click="changeConversation(user)">
-  		<div class="col-md-4 text-center">
-  			<img :src="user.image" class="img-circle" width="100px">
+  		<div class="col-xs-2 text-center">
+  			<img :src="user.image" class="img-circle" width="60px">
   		</div>
       <div class="col-md-8">
         <div class="name">

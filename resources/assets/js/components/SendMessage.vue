@@ -1,16 +1,15 @@
 <template>
   <div class="row send-message-box">
-    <form ref="form">
-      <div class="col-md-12">
-        &nbsp<i class="fa fa-link icon-file" @click="pickFile()"></i>
+    <form ref="form" @submit.prevent="save()">
+      <div class="col-md-1 col-xs-1 text-right">
+        <i class="fa fa-camera icon-file" @click="pickFile()"></i>
         <input type="file" ref="fileInput" style="display: none;" @change="imageChanged">
       </div>
-      <div class="col-md-11">
-        <input type="text" class="form-control" id="message" v-model="message" @keyup.enter="save()" />
-        <span style="display: none;" id="status">{{ filename }} has ready</span>
+      <div class="col-md-9 col-xs-8">
+        <input type="text" class="form-control" id="message" v-model="message" />
       </div>
-      <div class="col-md-1">
-        <button class="btn" @click.prevent="save()">
+      <div class="col-md-2 col-xs-2">
+        <button class="btn">
           <i class="fa fa-send"></i>
           Send
         </button>
@@ -29,7 +28,7 @@
       return {
         message: null,
         image: '',
-        filename: ''
+        filename: '',
       };
     },
 
@@ -40,21 +39,16 @@
 
       imageChanged (e) {
         //console.log(e.target.files[0])
-        var fileReader = new FileReader()
+        var fileReader = new FileReader();
 
-        fileReader.readAsDataURL(e.target.files[0])
-        this.filename = e.target.files[0].name
+        fileReader.readAsDataURL(e.target.files[0]);
+        this.filename = e.target.files[0].name;
 
         fileReader.onload = (e) => {
-          this.image = e.target.result
+          this.image = e.target.result;
 
-          if(this.image != '') {
-            $('#status').css('display', 'block')
-          }
-
+          this.save();
         }
-
-        //console.log(this.image)
       },
       save(){
 
@@ -67,13 +61,12 @@
         }
 
         axios.post('/send-message', msg).then((response) => {
-          bus.$emit('setConversation', response.data);
+          //bus.$emit('setConversation', response.data);
         });
 
-        this.message = ""
-        this.image = ""
-        this.filename = ''
-        $('#status').css('display', 'none')
+        this.message = '';
+        this.image = '';
+        this.filename = '';
       }, 
     }
   }

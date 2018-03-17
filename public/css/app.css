@@ -8385,3 +8385,104 @@ button.close {
   position: relative;
 }
 
+.chat-box {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #fff;
+}
+
+.chats {
+  padding: 30px 15px;
+}
+
+.chat-avatar {
+  float: right;
+}
+
+.chat-avatar .avatar {
+  width: 30px;
+}
+
+.chat-body {
+  display: block;
+  margin: 10px 30px 0 0;
+  overflow: hidden;
+}
+
+.chat-body:first-child {
+  margin-top: 0;
+}
+
+.chat-content {
+  position: relative;
+  display: block;
+  float: right;
+  padding: 8px 15px;
+  margin: 0 20px 10px 0;
+  clear: both;
+  color: #fff;
+  background-color: #3f51b5;
+  border-radius: .286rem;
+}
+
+.chat-content:before {
+  position: absolute;
+  top: 10px;
+  right: -10px;
+  width: 0;
+  height: 0;
+  content: '';
+  border: 5px solid transparent;
+  border-left-color: #3f51b5;
+}
+
+.chat-content p {
+  margin-bottom: .5rem;
+}
+
+.chat-content > p:last-child {
+  margin-bottom: 0;
+}
+
+.chat-content + .chat-content:before {
+  border-color: transparent;
+}
+
+.chat-time {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.chat-left .chat-avatar {
+  float: left;
+}
+
+.chat-left .chat-body {
+  margin-right: 0;
+  margin-left: 30px;
+}
+
+.chat-left .chat-content {
+  float: left;
+  margin: 0 0 10px 20px;
+  color: #757575;
+  background-color: #ebebeb;
+}
+
+.chat-left .chat-content:before {
+  right: auto;
+  left: -10px;
+  border-right-color: #ebebeb;
+  border-left-color: transparent;
+}
+
+.chat-left .chat-content + .chat-content:before {
+  border-color: transparent;
+}
+
+.chat-left .chat-time {
+  color: #9e9e9e;
+}
+
