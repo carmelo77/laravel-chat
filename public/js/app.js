@@ -43939,6 +43939,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     __WEBPACK_IMPORTED_MODULE_0__bus__["a" /* default */].$on('conversation', function (user) {
       _this.user = user;
+      _this.conversation = null;
 
       axios.post('/messages', {
         user: _this.user.id,
@@ -43956,6 +43957,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     axios.get('get-user').then(function (response) {
       _this.currentUser = response.data;
+
+      _this.$socket.emit('session', _this.currentUser);
     });
   },
 
@@ -43963,10 +43966,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {},
 
   sockets: {
-    message: function message(data) {
-      var msg = JSON.parse(data);
+    message: function message(msg) {
+      if (!this.conversation) {
+        this.conversation = msg.conversation;
+      }
 
-      console.log(this.conversation);
+      if (this.conversation.id != msg.conversation.id) {
+        return;
+      }
 
       this.messages.push(msg);
 

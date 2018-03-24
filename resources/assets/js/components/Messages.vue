@@ -54,6 +54,7 @@
     created(){
       bus.$on('conversation', (user) => {
         this.user = user;
+        this.conversation = null;
 
         axios.post('/messages', {
           user: this.user.id,
@@ -71,6 +72,8 @@
 
       axios.get('get-user').then((response) => {
         this.currentUser = response.data;
+
+        this.$socket.emit('session', this.currentUser);
       });
     },
 
@@ -79,10 +82,14 @@
     },
 
     sockets: {
-      message(data) {
-        let msg = JSON.parse(data);
+      message(msg) {
+        if (!this.conversation) {
+          this.conversation = msg.conversation;
+        }
 
-        console.log(this.conversation);
+        if (this.conversation.id != msg.conversation.id) {
+          return;
+        }
 
         this.messages.push(msg);
 

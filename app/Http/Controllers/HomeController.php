@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 
 use Auth;
+use LRedis;
 
 class HomeController extends Controller
 {

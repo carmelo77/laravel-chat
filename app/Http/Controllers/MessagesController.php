@@ -31,7 +31,8 @@ class MessagesController extends Controller
     	foreach ($conversation->messages as $index => $message) {
     		$messages[$index] = $message;
 
-    		$messages[$index]->user = $message->user;
+            $messages[$index]->user;
+    		$messages[$index]->conversation;
 
             if ($messages[$index]->type == 1) {
                 $messages[$index]->message = url(Storage::url($messages[$index]->message));
@@ -60,7 +61,7 @@ class MessagesController extends Controller
         switch ($request->type) {
             case 1:
                 $request->validate([
-                    'image' => 'required|image'
+                    'image' => 'image'
                 ]);
 
                 $message = $request->image->store('public/images/messages');
@@ -77,9 +78,13 @@ class MessagesController extends Controller
             'type'    => $request->type
         ]);
 
-        $message->user = $message->user;
+        $message->user;
 
-        $message->message = url(Storage::url($message->message));
+        if ($message->type == 1) {
+            $message->message = url(Storage::url($message->message));
+        }
+
+        $message->conversation->users;
 
         $redis = LRedis::connection();
         $redis->publish('message', $message);
@@ -110,7 +115,7 @@ class MessagesController extends Controller
                 }
             });
         }else{
-            $conversation = Conversation::find($conversation);
+            $conversation = Conversation::find($conversation->id);
         }
 
         return $conversation;
