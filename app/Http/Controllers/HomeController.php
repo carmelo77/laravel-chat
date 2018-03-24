@@ -21,7 +21,7 @@ class HomeController extends Controller
 
     	Auth::login($user);
 
-    	return "true";
+    	return redirect('/');
     }
 
     public function contacts()

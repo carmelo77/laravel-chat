@@ -21,8 +21,8 @@
               </div>
 
               <div class="chat-content" v-if="message.type == 1">
-                <a :href="'/laravel-chat/public/images/'+message.message" target="_blank">
-                  <img :src="'/laravel-chat/public/images/'+message.message" alt="" width="100">
+                <a :href="message.message" target="_blank">
+                  <img :src="message.message" alt="" width="100">
                 </a>
                 <time class="chat-time" :datetime="message.created_at">
                   {{ message.created_at }}

@@ -1,15 +1,15 @@
 <template>
   <div class="row send-message-box">
-    <form ref="form" @submit.prevent="save()">
+    <form id="conversation-id" @submit.prevent="save()" autocomplete="false" enctype="multipart/form-data">
       <div class="col-md-1 col-xs-1 text-right">
         <i class="fa fa-camera icon-file" @click="pickFile()"></i>
-        <input type="file" ref="fileInput" style="display: none;" @change="imageChanged">
+        <input type="file" name="image" ref="fileInput" style="display: none;" @change="imageChanged" accept="image/*" />
       </div>
       <div class="col-md-9 col-xs-8">
-        <input type="text" class="form-control" id="message" v-model="message" />
+        <input type="text" name="message" class="form-control" id="message" v-model="message" autocomplete="false" />
       </div>
       <div class="col-md-2 col-xs-2">
-        <button class="btn">
+        <button type="submit" class="btn">
           <i class="fa fa-send"></i>
           Send
         </button>
@@ -34,7 +34,7 @@
 
     methods: {
       pickFile () {
-        this.$refs.fileInput.click()
+        this.$refs.fileInput.click();
       },
 
       imageChanged (e) {
@@ -46,26 +46,34 @@
         fileReader.onload = (e) => {
           this.image = e.target.result;
 
-          this.save();
+          this.save(1);
         }
       },
-      save(){
+      save(type){
 
-        var msg = {}
+        let form = $('#conversation-id')[0];
 
-        if(this.image != '') {
-          msg = { message: this.image, user: this.user.id, type: 'images' }
-        } else {
-          msg = { message: this.message, user: this.user.id, type: 'text' }
+        let formData = new FormData(form);
+
+        formData.append('user', this.user.id);
+
+        switch (type) {
+          case 1:
+            formData.append('type', 1);
+            break;
+          default:
+            formData.append('type', 2);
+            break;
         }
 
-        axios.post('/send-message', msg).then((response) => {
-          $(".chat-box").scrollTop($("#chat-box").height());
-        });
-
-        this.message = '';
-        this.image = '';
-        this.filename = '';
+        axios.post('/send-message', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+          .then((response) => {
+            $(".chat-box").scrollTop($("#chat-box").height());
+          });
       }, 
     }
   }

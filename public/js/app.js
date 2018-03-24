@@ -43654,26 +43654,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       fileReader.onload = function (e) {
         _this.image = e.target.result;
 
-        _this.save();
+        _this.save(1);
       };
     },
-    save: function save() {
+    save: function save(type) {
 
-      var msg = {};
+      var form = $('#conversation-id')[0];
 
-      if (this.image != '') {
-        msg = { message: this.image, user: this.user.id, type: 'images' };
-      } else {
-        msg = { message: this.message, user: this.user.id, type: 'text' };
+      var formData = new FormData(form);
+
+      formData.append('user', this.user.id);
+
+      switch (type) {
+        case 1:
+          formData.append('type', 1);
+          break;
+        default:
+          formData.append('type', 2);
+          break;
       }
 
-      axios.post('/send-message', msg).then(function (response) {
+      axios.post('/send-message', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
         $(".chat-box").scrollTop($("#chat-box").height());
       });
-
-      this.message = '';
-      this.image = '';
-      this.filename = '';
     }
   }
 });
@@ -43690,7 +43697,11 @@ var render = function() {
     _c(
       "form",
       {
-        ref: "form",
+        attrs: {
+          id: "conversation-id",
+          autocomplete: "false",
+          enctype: "multipart/form-data"
+        },
         on: {
           submit: function($event) {
             $event.preventDefault()
@@ -43712,7 +43723,7 @@ var render = function() {
           _c("input", {
             ref: "fileInput",
             staticStyle: { display: "none" },
-            attrs: { type: "file" },
+            attrs: { type: "file", name: "image", accept: "image/*" },
             on: { change: _vm.imageChanged }
           })
         ]),
@@ -43728,7 +43739,12 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text", id: "message" },
+            attrs: {
+              type: "text",
+              name: "message",
+              id: "message",
+              autocomplete: "false"
+            },
             domProps: { value: _vm.message },
             on: {
               input: function($event) {
@@ -43752,7 +43768,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-2 col-xs-2" }, [
-      _c("button", { staticClass: "btn" }, [
+      _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
         _c("i", { staticClass: "fa fa-send" }),
         _vm._v("\n        Send\n      ")
       ])
@@ -44039,19 +44055,12 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: {
-                              href:
-                                "/laravel-chat/public/images/" +
-                                message.message,
-                              target: "_blank"
-                            }
+                            attrs: { href: message.message, target: "_blank" }
                           },
                           [
                             _c("img", {
                               attrs: {
-                                src:
-                                  "/laravel-chat/public/images/" +
-                                  message.message,
+                                src: message.message,
                                 alt: "",
                                 width: "100"
                               }

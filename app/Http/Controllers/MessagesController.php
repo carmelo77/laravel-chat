@@ -11,6 +11,7 @@ use App\Message;
 use LRedis;
 
 use Auth;
+use Storage;
 
 class MessagesController extends Controller
 {
@@ -19,26 +20,7 @@ class MessagesController extends Controller
     	$userLogged = Auth::user();
     	$userTo = User::find($request->user);
 
-    	if (!$request->conversation) {
-    		$userLogged = Auth::user();
-	    	$userTo = User::find($request->user);
-
-	    	$conversation1 = UserConversation::where('user_id', $userLogged->id)->get();
-	    	$conversations2 = UserConversation::where('user_id', $userTo->id)->get();
-
-	    	$conversation = null;
-
-	    	foreach ($conversations2 as $conversation2) {
-	    		$conversation = $conversation1->where('conversation_id', $conversation2->conversation_id)->first();
-
-	    		if ($conversation) {
-	    			$conversation = $conversation->conversation;
-	    			break;
-	    		}
-	    	}
-    	}else{
-    		$conversation = Conversation::find($request->conversation);
-    	}
+    	$conversation = $this->getConversation($request->conversation,  $userTo);
 
     	if (!$conversation) {
     		return [];
@@ -50,6 +32,10 @@ class MessagesController extends Controller
     		$messages[$index] = $message;
 
     		$messages[$index]->user = $message->user;
+
+            if ($messages[$index]->type == 1) {
+                $messages[$index]->message = url(Storage::url($messages[$index]->message));
+            }
     	}
 
     	return response()->json($messages);
@@ -60,102 +46,73 @@ class MessagesController extends Controller
         
     	$request->validate([
     		'user' => 'required',
-    		'message' => 'required|min:3',
     	]);
 
     	$userLogged = Auth::user();
     	$userTo = User::find($request->user);
 
-    	$conversation1 = UserConversation::where('user_id', $userLogged->id)->get();
-    	$conversations2 = UserConversation::where('user_id', $userTo->id)->get();
-
-    	$conversation = null;
-
-    	foreach ($conversations2 as $conversation2) {
-    		$conversation = $conversation1->where('conversation_id', $conversation2->conversation_id)
-    			->first()->conversation;
-
-    		if ($conversation) {
-    			break;
-    		}
-    	}
+    	$conversation = $this->getConversation($request->conversation, $userTo);
 
     	if (!$conversation) {
-    		$conversation = Conversation::create();
-
-    		//user 1
-    		UserConversation::create([
-    			'conversation_id' => $conversation->id,
-    			'user_id' => $userLogged->id,
-    		]);
-
-    		//user 2
-    		UserConversation::create([
-    			'conversation_id' => $conversation->id,
-    			'user_id' => $userTo->id,
-    		]);
-
-    		$conversation1 = UserConversation::where('user_id', $userLogged->id)->get();
-    		$conversations2 = UserConversation::where('user_id', $userTo->id)->get();
-
-    		foreach ($conversations2 as $conversation2) {
-	    		$conversation = $conversation1->where('conversation_id', $conversation2->conversation_id)
-	    			->first()->conversation;
-
-	    		if ($conversation) {
-	    			break;
-	    		}
-	    	}
+    		$conversation = $this->createConversation($userTo);
     	}
 
-        if($request->type === 'images') {
+        switch ($request->type) {
+            case 1:
+                $request->validate([
+                    'image' => 'required|image'
+                ]);
 
-            $explode = explode(',', $request->message);
-
-            $decoded = base64_decode($explode[1]);
-
-            if(str_contains($explode[0], 'jpeg')) {
-                $ext = 'jpg';
-            } else if(str_contains($explode[0], 'png')) {
-                $ext = 'png';
-            }
-
-            $filename = str_random().'.'.$ext;
-            $path = public_path().'/images/'.$filename; 
-
-            file_put_contents($path, $decoded);
-
-            $message = Message::create([
-                'conversation_id' => $conversation->id,
-                'user_id' => $userLogged->id,
-                'message' => $filename,
-                'type'    => 1
-            ]);
-
-            $message->user = $message->user;
-
-            $redis = LRedis::connection();
-            $redis->publish('message', $message);
-
-            return response()->json($conversation);
-
-        } else if($request->type === 'text'){
-
-        	$message = Message::create([
-        		'conversation_id' => $conversation->id,
-        		'user_id' => $userLogged->id,
-        		'message' => $request->message,
-                'type'    => 2
-        	]);
-
-            $message->user = $message->user;
-
-            $redis = LRedis::connection();
-            $redis->publish('message', $message);
-
-            return response()->json($conversation);
-
+                $message = $request->image->store('public/images/messages');
+            break;
+            
+            default:
+                $message = $request->message;
+                break;
         }
 
+        $message = $conversation->messages()->create([
+            'user_id' => $userLogged->id,
+            'message' => $message,
+            'type'    => $request->type
+        ]);
+
+        $message->user = $message->user;
+
+        $message->message = url(Storage::url($message->message));
+
+        $redis = LRedis::connection();
+        $redis->publish('message', $message);
+
+        return response()->json($conversation);
+    }
+
+    public function createConversation(User $userTo)
+    {
+        $conversation = Conversation::create();
+
+        $conversation->users()->sync([
+            Auth::user()->id,
+            $userTo->id
+        ]);
+
+        return $conversation;
+    }
+
+    public function getConversation($conversation = null, User $userTo)
+    {
+        if (!$conversation) {
+            $userLogged = Auth::user();
+
+            $conversation = $userLogged->conversations->first(function ($conversation) use ($userTo) {
+                if ($conversation->users()->where('user_id', $userTo->id)->first()) {
+                    return true;
+                }
+            });
+        }else{
+            $conversation = Conversation::find($conversation);
+        }
+
+        return $conversation;
     }
 }
