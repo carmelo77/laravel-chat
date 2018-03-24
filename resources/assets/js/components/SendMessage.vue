@@ -38,7 +38,6 @@
       },
 
       imageChanged (e) {
-        //console.log(e.target.files[0])
         var fileReader = new FileReader();
 
         fileReader.readAsDataURL(e.target.files[0]);

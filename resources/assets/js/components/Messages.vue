@@ -82,6 +82,8 @@
       message(data) {
         let msg = JSON.parse(data);
 
+        console.log(this.conversation);
+
         this.messages.push(msg);
 
         setTimeout(() => {
