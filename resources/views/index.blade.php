@@ -15,6 +15,9 @@
   <body>
     <div id="app" class="container">
       <div class="row-fluid">
+        <div class="col-md-12">
+          <h1>Conected: {{ Auth::user()->name }}</h1>
+        </div>
         <contacts></contacts>
         <messages></messages>
       </div>
