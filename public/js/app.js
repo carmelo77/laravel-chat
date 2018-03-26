@@ -43998,8 +43998,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.conversation = msg.conversation;
       }
 
-      console.log(this.conversation, msg.conversation);
-
       if (this.conversation.id != msg.conversation.id) {
         return;
       }
