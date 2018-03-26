@@ -24,6 +24,7 @@
         "socket.io": "^2.0.3"
     },
     "dependencies": {
+        "toastr": "^2.1.4",
         "vue-socket.io": "^2.1.1-b"
     }
 }

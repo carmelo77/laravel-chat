@@ -72,6 +72,7 @@
           }
         })
           .then((response) => {
+            form.reset();
             $(".chat-box").scrollTop($("#chat-box").height());
           });
       }, 
