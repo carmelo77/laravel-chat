@@ -115,7 +115,7 @@ class MessagesController extends Controller
                 }
             });
         }else{
-            $conversation = Conversation::find($conversation->id);
+            $conversation = Conversation::find($conversation['id']);
         }
 
         return $conversation;

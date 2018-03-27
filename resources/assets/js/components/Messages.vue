@@ -41,6 +41,8 @@
 
 <script>
   import bus from './../bus';
+  import toastr from 'toastr';
+
   export default {
     data(){
       return {
@@ -56,18 +58,7 @@
         this.user = user;
         this.conversation = null;
 
-        axios.post('/messages', {
-          user: this.user.id,
-          conversation: this.conversation,
-        }).then((response) => {
-          this.messages = response.data;
-
-          setTimeout(() => {
-            $(".chat-box").scrollTop($("#chat-box").height());
-          }, 500)
-
-          //$('#chat-box').scrollTop();​​
-        });
+        this.getMessages(user);
       });
 
       axios.get('get-user').then((response) => {
@@ -78,11 +69,36 @@
     },
 
     methods:{
-      
+      getMessages(user) {
+        axios.post('/messages', {
+          user: user.id,
+          conversation: this.conversation,
+        }).then((response) => {
+          this.messages = response.data;
+
+          setTimeout(() => {
+            $(".chat-box").scrollTop($("#chat-box").height());
+          }, 500);
+        });
+      }
     },
 
     sockets: {
       message(msg) {
+        if (this.currentUser.id != msg.user.id && this.user.id != msg.user.id) {
+          toastr.success('new message from ' + msg.user.name, '').on('click', () => {
+            let user = msg.user;
+
+            this.messages = [];
+            this.conversation = msg.conversation;
+            this.user = msg.user;
+
+            this.getMessages(user);
+          });
+
+          return;
+        }
+
         if (!this.conversation) {
           this.conversation = msg.conversation;
         }
