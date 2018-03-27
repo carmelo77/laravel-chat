@@ -78,9 +78,7 @@
 
           setTimeout(() => {
             $(".chat-box").scrollTop($("#chat-box").height());
-          }, 500)
-
-          //$('#chat-box').scrollTop();​​
+          }, 500);
         });
       }
     },

@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "toastr": "^2.1.4",
+        "vue-emoji-picker": "^0.1.2",
         "vue-socket.io": "^2.1.1-b"
     }
 }
