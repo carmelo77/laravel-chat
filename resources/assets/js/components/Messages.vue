@@ -14,7 +14,7 @@
             </div>
             <div class="chat-body">
               <div class="chat-content" v-if="message.type == 2">
-                <p v-text="message.message"></p>
+                <p v-html="anchorme(message.message)"></p>
                 <time class="chat-time" :datetime="message.created_at">
                   {{ message.created_at }}
                 </time>
@@ -42,6 +42,7 @@
 <script>
   import bus from './../bus';
   import toastr from 'toastr';
+  import anchorme from 'anchorme';
 
   export default {
     data(){
@@ -50,6 +51,7 @@
         conversation: null,
         messages: [],
         currentUser: null,
+        anchorme: anchorme,
       }
     },
 
@@ -107,6 +109,8 @@
           return;
         }
 
+        msg.message = anchorme(msg.message);
+
         this.messages.push(msg);
 
         setTimeout(() => {
@@ -117,7 +121,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   #visible-chat{
     height:93%;
     overflow-y:auto;
@@ -126,5 +130,8 @@
   .message{
     padding: 10px;
     padding-left: 20px;
+  }
+  .chat-content a{
+    color: yellow !important;
   }
 </style>

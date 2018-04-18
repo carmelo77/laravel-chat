@@ -1,12 +1,12 @@
 <template>
   <div class="row send-message-box">
-    <form id="conversation-id" @submit.prevent="save()" autocomplete="false" enctype="multipart/form-data">
+    <form id="conversation-id" method="POST" autocomplete="false" enctype="multipart/form-data">
       <div class="col-md-1 col-xs-1 text-right">
         <i class="fa fa-camera icon-file" @click="pickFile()"></i>
         <input type="file" name="image" ref="fileInput" style="display: none;" @change="imageChanged" accept="image/*" />
       </div>
       <div class="col-md-9 col-xs-8">
-        <input type="text" name="message" class="form-control regular-input" id="message" v-model="message" autocomplete="false" />
+        <input type="text" class="form-control regular-input" v-model="message" autocomplete="false" @keypress.enter.prevent="save()" />
         <emoji-picker @emoji="append" :search="search">
           <div
                class="emoji-invoker"
@@ -37,7 +37,7 @@
         </emoji-picker>
       </div>
       <div class="col-md-2 col-xs-2 wrapper">
-        <button type="submit" class="btn">
+        <button type="submit" class="btn" @click.prevent="save()">
           <i class="fa fa-send"></i>
           Send
         </button>
@@ -83,12 +83,12 @@
         }
       },
       save(type){
-
         let form = $('#conversation-id')[0];
 
         let formData = new FormData(form);
 
         formData.append('user', this.user.id);
+        formData.append('message', this.message);
 
         switch (type) {
           case 1:
@@ -106,6 +106,7 @@
         })
           .then((response) => {
             form.reset();
+            this.message = '';
             $(".chat-box").scrollTop($("#chat-box").height());
           });
       }, 

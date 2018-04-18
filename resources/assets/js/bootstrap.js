@@ -33,7 +33,7 @@ let token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-    window.axios.defaults.baseURL = 'http://localhost/laravel-chat/public';
+    window.axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
