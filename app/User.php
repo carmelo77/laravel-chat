@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Conversation;
+use Illuminate\Support\Facades\Cache;
 
 class User extends Authenticatable
 {
@@ -25,9 +26,17 @@ class User extends Authenticatable
      *
      * @var array
      */
+
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $appends = ['isOnline'];
+
+     public function getIsOnlineAttribute()
+    {
+        return Cache::has('user-online-'. $this->id);
+    }
 
     public function conversations()
     {

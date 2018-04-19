@@ -43740,7 +43740,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\SendMessage.vue"
+Component.options.__file = "resources/assets/js/components/SendMessage.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -43749,9 +43749,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0063b638", Component.options)
+    hotAPI.createRecord("data-v-98b52910", Component.options)
   } else {
-    hotAPI.reload("data-v-0063b638", Component.options)
+    hotAPI.reload("data-v-98b52910", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -43772,13 +43772,13 @@ var content = __webpack_require__(52);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7bf10e4d", content, false, {});
+var update = __webpack_require__(4)("be708de2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0063b638\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SendMessage.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0063b638\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SendMessage.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-98b52910\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SendMessage.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-98b52910\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SendMessage.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -44203,7 +44203,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0063b638", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-98b52910", module.exports)
   }
 }
 
@@ -44237,7 +44237,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Messages.vue"
+Component.options.__file = "resources/assets/js/components/Messages.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -44246,9 +44246,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ade8bc7a", Component.options)
+    hotAPI.createRecord("data-v-c43016fa", Component.options)
   } else {
-    hotAPI.reload("data-v-ade8bc7a", Component.options)
+    hotAPI.reload("data-v-c43016fa", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -44269,13 +44269,13 @@ var content = __webpack_require__(59);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("53b1c9e6", content, false, {});
+var update = __webpack_require__(4)("ce8c2a5a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ade8bc7a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Messages.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ade8bc7a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Messages.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c43016fa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Messages.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c43016fa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Messages.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -45300,7 +45300,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-ade8bc7a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-c43016fa", module.exports)
   }
 }
 
@@ -45334,7 +45334,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Contacts.vue"
+Component.options.__file = "resources/assets/js/components/Contacts.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -45343,9 +45343,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-41df254a", Component.options)
+    hotAPI.createRecord("data-v-36bb780a", Component.options)
   } else {
-    hotAPI.reload("data-v-41df254a", Component.options)
+    hotAPI.reload("data-v-36bb780a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -45366,13 +45366,13 @@ var content = __webpack_require__(70);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("118d5b42", content, false, {});
+var update = __webpack_require__(4)("1ce989b0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41df254a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Contacts.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41df254a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Contacts.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-36bb780a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Contacts.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-36bb780a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Contacts.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -45390,7 +45390,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n@media (max-width: 994px) {\n.contact{\n    overflow: auto;\n    padding-top: 0px;\n    height: 100% !important;\n}\n.contact .user{\n    display: none;\n}\n}\n", ""]);
+exports.push([module.i, "\n@media (max-width: 994px) {\n.contact{\n    overflow: auto;\n    padding-top: 0px;\n    height: 100% !important;\n}\n.contact .user{\n    display: none;\n}\n}\n.offline {\n    width: 25px; \n    height: 20px; \n    border: 2px solid gray; \n    border-radius: 50%; \n    background-color: gray;\n    float: right;\n}\n.online {\n  width: 25px; \n  height: 20px; \n  border: 2px solid green; \n  border-radius: 50%; \n  background-color: green;\n  float: right;\n}\n", ""]);
 
 // exports
 
@@ -45402,6 +45402,8 @@ exports.push([module.i, "\n@media (max-width: 994px) {\n.contact{\n    overflow:
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus__ = __webpack_require__(6);
+//
+//
 //
 //
 //
@@ -45448,7 +45450,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     changeConversation: function changeConversation(user) {
+      var _this2 = this;
+
       __WEBPACK_IMPORTED_MODULE_0__bus__["a" /* default */].$emit('conversation', user);
+
+      axios.get('/contacts').then(function (response) {
+        _this2.users = response.data;
+      });
     },
     showUsers: function showUsers() {
       if (!this.show) {
@@ -45497,7 +45505,12 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "col-xs-8" }, [
               _c("div", { staticClass: "name" }, [
-                _vm._v("\n          " + _vm._s(user.name) + "\n        ")
+                _vm._v("\n          " + _vm._s(user.name) + " \n          "),
+                !user.isOnline
+                  ? _c("div", { staticClass: "offline" })
+                  : _vm._e(),
+                _vm._v(" "),
+                user.isOnline ? _c("div", { staticClass: "online" }) : _vm._e()
               ]),
               _vm._v(" "),
               _c("span", { staticClass: "last-message" }, [
@@ -45526,7 +45539,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-41df254a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-36bb780a", module.exports)
   }
 }
 

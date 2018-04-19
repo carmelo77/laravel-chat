@@ -7,7 +7,9 @@
         </div>
         <div class="col-xs-8">
           <div class="name">
-            {{ user.name }}
+            {{ user.name }} 
+            <div class="offline" v-if="!user.isOnline"></div>
+            <div class="online" v-if="user.isOnline"></div>
           </div>
           <span class="last-message">
             Lorem ipsum dolor sit amet, elit...
@@ -43,6 +45,10 @@
     methods: {
       changeConversation(user){
         bus.$emit('conversation', user);
+
+        axios.get('/contacts').then((response) => {
+          this.users = response.data;
+        });
       },
       showUsers(){
         if (!this.show) {
@@ -70,5 +76,21 @@
     .contact .user{
       display: none;
     }
+  }
+  .offline {
+      width: 25px; 
+      height: 20px; 
+      border: 2px solid gray; 
+      border-radius: 50%; 
+      background-color: gray;
+      float: right;
+    }
+  .online {
+    width: 25px; 
+    height: 20px; 
+    border: 2px solid green; 
+    border-radius: 50%; 
+    background-color: green;
+    float: right;
   }
 </style>
